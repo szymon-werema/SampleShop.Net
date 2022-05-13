@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Models
+namespace Shop.Models.Messenger
 {
-    public interface IUserFactory 
+    public interface IMessenger
     {
-        UserAccountUser createUser();
-        UserAccountAdmin createAdmin();
+
     }
 }

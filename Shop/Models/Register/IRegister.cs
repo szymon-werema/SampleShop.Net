@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace Shop.Models
+using Shop.Models.Users;
+namespace Shop.Models.Register
 {
-    public interface IRegister<T>
+    public interface IRegister <T>
     {
-        void RegisterUser(T user);
+       public Task RegisterAsync(T user);
     }
 }

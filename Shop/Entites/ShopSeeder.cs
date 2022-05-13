@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shop.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +10,37 @@ namespace Shop.Entities
     public class ShopSeeder
     {
         private readonly ModelBuilder modelBuilder;
+       
+
         public ShopSeeder(ModelBuilder modelBuilder)
         {
             this.modelBuilder = modelBuilder;
+            
         }
         public void SeedDatabase()
         {
-            modelBuilder.Entity<UserRole>()
-                .ToTable("UserRoles")
-                .HasData(GetRoles());
-            modelBuilder.Entity<User>()
-                .ToTable("Users")
-                .HasData(GetUser());
+            modelBuilder.Entity<UserRole>(eb =>
+           {
+               eb.HasMany(ur => ur.Users)
+                .WithOne(u => u.UserRole)
+                .HasForeignKey(u => u.UserRoleId);
+
+               eb.ToTable("UserRoles")
+                .HasData(GetRoles()); 
+           });
+
+            modelBuilder.Entity<User>(eb =>
+            {
+               
+
+                eb.HasOne(u => u.Address)
+               .WithOne(a => a.User)
+               .HasForeignKey<Address>(a => a.UserId);
+                eb.ToTable("Users")
+               .HasData(GetUser());
+            });
+                
+                
         }
         private List<UserRole> GetRoles()
         {
@@ -48,18 +66,18 @@ namespace Shop.Entities
 
         private User GetUser()
         {
-
-            return new User()
+            User user = new User()
             {
                 Id = 1,
                 FristName = "Admin",
                 LastName = "Admin",
                 Email = "admin@local.pl",
-                UserRoleId = 1,
-                Password = "admin"
+                Password = "",
+                UserRoleId = 2
             };
+            
+            return user;
         }
     }
-    
-    
+
 }

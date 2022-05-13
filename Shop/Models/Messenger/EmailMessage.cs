@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Entities
+namespace Shop.Models.Messenger
 {
-    public class UserRole
+    public class EmailMessage : IMessenger
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+
     }
 }

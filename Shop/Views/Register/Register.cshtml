@@ -1,4 +1,4 @@
-﻿@model Shop.Models.UserAccountUser
+﻿@model Shop.Models.Users.UserClient
 
 @{
     ViewData["Title"] = "Register";
@@ -24,18 +24,37 @@
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" type="email" class="form-control" />
-                <span asp-validation-for="Email"  class="text-danger"></span>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <label asp-for="ComfirmPassword"  class="control-label"></label>
+                <input asp-for="ComfirmPassword" type="password" class="form-control" />
+                <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
             </div>
+            
             
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            @if(ViewBag.ErrorMessage!= null)
+            {
+                @foreach (var message in ViewBag.ErrorMessage)
+                {
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert">
+                      @message
+                    </div>
+                </div>
+                }
+            }
+            
+             
         </form>
     </div>
 </div>
@@ -44,3 +63,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

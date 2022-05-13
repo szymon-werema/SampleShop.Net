@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Lekcje\\3 II sem\\Net\\Shop\\Shop.csproj": {}
+    "D:\\Git\\SampleShop.Net\\Shop\\Shop.csproj": {}
   },
   "projects": {
-    "D:\\Lekcje\\3 II sem\\Net\\Shop\\Shop.csproj": {
+    "D:\\Git\\SampleShop.Net\\Shop\\Shop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lekcje\\3 II sem\\Net\\Shop\\Shop.csproj",
+        "projectUniqueName": "D:\\Git\\SampleShop.Net\\Shop\\Shop.csproj",
         "projectName": "Shop",
-        "projectPath": "D:\\Lekcje\\3 II sem\\Net\\Shop\\Shop.csproj",
+        "projectPath": "D:\\Git\\SampleShop.Net\\Shop\\Shop.csproj",
         "packagesPath": "C:\\Users\\Ja\\.nuget\\packages\\",
-        "outputPath": "D:\\Lekcje\\3 II sem\\Net\\Shop\\obj\\",
+        "outputPath": "D:\\Git\\SampleShop.Net\\Shop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ja\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.4, )"
@@ -60,7 +68,11 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
+            },
+            "ServiceStack": {
+              "target": "Package",
+              "version": "[6.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
