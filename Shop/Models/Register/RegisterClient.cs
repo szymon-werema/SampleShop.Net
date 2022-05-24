@@ -1,40 +1,38 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Models.Users;
 using Shop.Entities;
+using Shop.Models.Forms;
+
 namespace Shop.Models.Register
 {
-    public class RegisterClient : IRegister<UserClient>
+    public class RegisterClient : IRegister<UserRegisterForm>
     {
-        private readonly LocalDbContext context;
+        private readonly LocalDbContext db;
         private readonly IPasswordHasher<User> passwordHasher;
 
-        public RegisterClient(LocalDbContext context, IPasswordHasher<User> passwordHasher )
+
+        public RegisterClient(LocalDbContext db, IPasswordHasher<User> passwordHasher)
         {
-            this.context = context;
+            this.db = db;
             this.passwordHasher = passwordHasher;
         }
-        public async Task RegisterAsync(UserClient user)
+
+        public async Task RegisterAsync(UserRegisterForm user)
         {
-            Console.WriteLine("-----------------------------------------------");
-            Console.WriteLine(user.UserRoleId);
-            Console.WriteLine("-----------------------------------------------");
+            
             var newUser = new User()
             {
                 Email = user.Email,
                 Password = user.Password,
                 FristName = user.FristName,
                 LastName = user.LastName,
-                UserRoleId = user.UserRoleId
+                UserRoleId = 1
             };
 
             newUser.Password = passwordHasher.HashPassword(newUser, user.Password);
-            await context.User.AddAsync(newUser);
-            await context.SaveChangesAsync();
+            await db.User.AddAsync(newUser);
+            await db.SaveChangesAsync(); 
         }
+        
+      
     }
 }

@@ -8,6 +8,9 @@ namespace Shop.Models.Messenger
 {
     public class EmailMessage : IMessenger
     {
-
+        public void sendMessage(string message, string recipient)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

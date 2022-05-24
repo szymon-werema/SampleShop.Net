@@ -281,3 +281,12 @@ D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
 D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
 D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\System.Web.WebPages.dll
 D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\libman.json
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\PasswordGenerator.dll

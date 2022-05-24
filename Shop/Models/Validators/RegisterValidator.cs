@@ -1,25 +1,15 @@
 ﻿using FluentValidation;
-using Shop.Models.Users;
+using Shop.Models.Register;
 using Shop.Entities;
-using ServiceStack;
 
+using Shop.Models.Forms;
 namespace Shop.Models.Validators
 {
-    public class RegisterValidator : AbstractValidator<UserClient>
+    public class RegisterValidator : AbstractValidator<UserRegisterForm>
     {
         public RegisterValidator( LocalDbContext db)
         {
-            RuleFor(x => x.UserRoleId)
-
-                .Custom((vaule, message) =>
-                {
-                    if (vaule != db.UserRole.Where(r => r.Name == "User").Select(r => r.Id).FirstOrDefault())
-                    {
-
-                        message.AddFailure("Incorrect id for this user");
-                    }
-                    
-                });
+           
             RuleFor(x => x.Email)
                  .EmailAddress();
             RuleFor(x => x.Email)

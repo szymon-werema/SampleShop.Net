@@ -2,34 +2,81 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop.Entities;
 using Shop.Models.Register;
-using Shop.Models.Users;
 using Shop.Models.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Shop.Models.Jwt;
+using Shop.Models.Authenticate;
+using Shop.Models.AccountMenager;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Shop.Models.Forms;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var jwtConfig = new JwtSetting();
+builder.Configuration.GetSection("Authentication").Bind(jwtConfig);
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer( cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.JwtKey)),
+        
+       
+    };
+});
+builder.Services.AddSingleton(jwtConfig);
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<LocalDbContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("LocalDatabase"))
     );
-builder.Services.AddScoped<IFactoryUser, FactoryUser>();
-builder.Services.AddScoped<IRegister<UserAdmin>, RegisterAdmin>();
-builder.Services.AddScoped<IRegister<UserSeller>, RegisterSeller>();
-builder.Services.AddScoped<IRegister<UserClient>, RegisterClient>();
+
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-builder.Services.AddScoped<IValidator<UserClient>, RegisterValidator>();
+
+
+
+//Validators
+
+builder.Services.AddScoped<IValidator<UserRegisterForm>, RegisterValidator>();
+
+//Tokens
+builder.Services.AddScoped<IToken<TokenByAdmin> , TokenByAdmin>();
+builder.Services.AddScoped<IToken<TokenRegister> , TokenRegister>();
+builder.Services.AddScoped<AccountMenager>();
+
+//Claims
+builder.Services.AddScoped<IClaimsUser<ClaimsRegister>, ClaimsRegister>();
+builder.Services.AddScoped<IClaimsUser<ClaimsAddByAdmin>, ClaimsAddByAdmin>();
+
+//Register
+builder.Services.AddScoped<IRegister<UserRegisterForm> , RegisterClient>();
+builder.Services.AddScoped<IRegister<AddUserForm>, RegisterByAdmin>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseAuthentication();
 app.UseRouting();
 
 app.UseAuthorization();
@@ -39,3 +86,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+

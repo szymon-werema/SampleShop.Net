@@ -1,32 +1,34 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Shop.Models.Register;
-using Shop.Models.Users;
-
+using Shop.Models.Forms;
+using Shop.Models.Authenticate;
 
 
 namespace Shop.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly IFactoryUser factoryUser;
-        private readonly IRegister<UserClient> register;
+      
+        private readonly IRegister<UserRegisterForm> register;
+        private readonly IToken<TokenRegister> tokenJWT;
 
-        public RegisterController(IFactoryUser factoryUser, IRegister<UserClient> register)
+        public RegisterController(IRegister<UserRegisterForm> register, IToken<TokenRegister> tokenJWT)
         {
-            this.factoryUser = factoryUser;
+            
             this.register = register;
+            this.tokenJWT = tokenJWT;
         }
 
         [HttpGet("Register")]
         public ActionResult Register()
         {
             
-            return View(factoryUser.createClient());
+            return View("Views/Register/Register.cshtml",new UserRegisterForm());
         }
 
         [HttpPost("Register")]
-        public ActionResult Register(UserClient user)
+        public async Task<ActionResult> RegisterAsync(UserRegisterForm user)
         {
             //foreach (string key in Request.Form.Keys)
             //{
@@ -35,24 +37,20 @@ namespace Shop.Controllers
             //}
             if(ModelState.IsValid)
             {
-               
-                return View();
-            }
-            //ViewBag.Types= 
-            ViewBag.ErrorMessage = ModelState.Values.SelectMany(v => v.Errors).Select(m => m.ErrorMessage);
-            //foreach (var m in ViewBag.ErrorMessage)
-            //{
-            //    Console.WriteLine(m.errorMessage);
-            //}
-
-            //foreach( var m in ModelState.Values.SelectMany(v => v.Errors).Select(m => m.ErrorMessage))
-            //{
-            //    Console.WriteLine(m);
-            //}
-            return View();
                 
-            
-           
+                await register.RegisterAsync(user);
+               
+                var token = tokenJWT.generateToken(user.Email);
+                Console.WriteLine(token);
+                
+                //HttpContext.Session.SetString("Token", token.ToString());
+                return View("Views/Register/SuccesRegister.cshtml");
+            }
+
+            ViewBag.ErrorMessage = ModelState.Values.SelectMany(v => v.Errors).Select(m => m.ErrorMessage);
+            return View();
+
         }
+
     }
 }

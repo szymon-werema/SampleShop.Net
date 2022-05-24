@@ -15,6 +15,34 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Git\SampleShop.Net\Shop
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Git/SampleShop.Net/Shop/Views/Activation/ActivateAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxBY3RpdmF0ZUFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Activation/ActivateAccountPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxBY3RpdmF0ZUFjY291bnRQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Activation/AlreadyActivated.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxBbHJlYWR5QWN0aXZhdGVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Activation/BadToken.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxCYWRUb2tlbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Activation/RegisterActivate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxSZWdpc3RlckFjdGl2YXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Activation/SuccesActivation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxTdWNjZXNBY3RpdmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/AdminPanel/AddUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxBZGRVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Git/SampleShop.Net/Shop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -25,6 +53,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Git/SampleShop.Net/Shop/Views/Register/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Register/SuccesRegister.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcU3VjY2VzUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Git/SampleShop.Net/Shop/Views/Shared/Error.cshtml]

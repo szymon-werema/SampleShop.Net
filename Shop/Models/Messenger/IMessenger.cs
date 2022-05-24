@@ -8,6 +8,6 @@ namespace Shop.Models.Messenger
 {
     public interface IMessenger
     {
-
+        public void sendMessage(string message, string recipient);
     }
 }
