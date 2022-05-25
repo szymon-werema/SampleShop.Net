@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
 {
-    
+    [Authorize]
     public class AdminPanelController : Controller
     {
         private readonly LocalDbContext db;
@@ -40,10 +40,16 @@ namespace Shop.Controllers
         [HttpPost]
         public ActionResult AddUser(AddUserForm user)
         {
-           
-            register.RegisterAsync(user);
-            Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("ActivateAccountPassword", "Activation", new { token = tokenJWT.generateToken(user.Email) }), user.Email));
-            return View();
+           if(ModelState.IsValid)
+           {
+                register.RegisterAsync(user);
+                string token = tokenJWT.generateToken(user.Email);
+                Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("ActivateAccountPassword", "Activation", new { token = token }), user.Email));
+                return View();
+           }
+           ViewBag.UserRoleId = new SelectList(db.UserRole.ToDictionary(role => role.Id, role => role.Name), "Key", "Value");
+           return View();
+
         }
 
     }

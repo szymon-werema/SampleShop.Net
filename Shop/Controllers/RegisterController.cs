@@ -5,8 +5,10 @@ using Shop.Models.Forms;
 using Shop.Models.Authenticate;
 using Shop.Models.Messenger;
 
+
 namespace Shop.Controllers
 {
+    
     public class RegisterController : Controller
     {
       
@@ -44,8 +46,9 @@ namespace Shop.Controllers
             {
                 
                 await register.RegisterAsync(user);
-               
-                Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> "  + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("RegisterActivate", "Activation",  new { token = tokenJWT.generateToken(user.Email) }), user.Email));
+                string token = tokenJWT.generateToken(user.Email);
+                
+                await messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("RegisterActivate", "Activation", new { token = token }), "lolxwot@gmail.com");
                 return View("Views/Register/SuccesRegister.cshtml");
             }
 

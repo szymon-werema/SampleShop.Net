@@ -4,8 +4,11 @@ using Shop.Models.AccountMenager;
 using System.Security.Claims;
 using Shop.Entities;
 using Shop.Models.Forms;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Shop.Controllers
 {
+    
     public class ActivationController : Controller
     {
         private readonly IToken<TokenByAdmin> tokenJWT;
@@ -50,15 +53,19 @@ namespace Shop.Controllers
         [HttpPost]
         public ActionResult ActivateAccountPassword(SetPasswordForm form)
         {
-            if (!tokenJWT.veryfyToken(form.Token)) return View("BadToken");
-            List<Claim> claims = tokenJWT.getClaims(form.Token);
-            if (!claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod)) return RedirectToAction("RegisterActivate", "Activation", new { token = form.Token });
-            string email = claims.Find(x => x.Type == ClaimTypes.Email).Value;
-            if(accountMenager.CheackActivation(email)) return View("AlreadyActivated");
-            accountMenager.ChangePasswordAsync(email, form.Password);
-            accountMenager.ActiveAccountAsync(email);
+            if(ModelState.IsValid)
+            {
+                if (!tokenJWT.veryfyToken(form.Token)) return View("BadToken");
+                List<Claim> claims = tokenJWT.getClaims(form.Token);
+                if (!claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod)) return RedirectToAction("RegisterActivate", "Activation", new { token = form.Token });
+                string email = claims.Find(x => x.Type == ClaimTypes.Email).Value;
+                if (accountMenager.CheackActivation(email)) return View("AlreadyActivated");
+                accountMenager.ChangePasswordAsync(email, form.Password);
+                accountMenager.ActiveAccountAsync(email);
+                return View("SuccesActivation");
+            }
 
-            return View("SuccesActivation");
+            return View();
         }
 
 

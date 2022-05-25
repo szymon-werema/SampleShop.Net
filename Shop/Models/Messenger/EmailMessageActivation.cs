@@ -18,24 +18,33 @@ namespace Shop.Models.Messenger
         {
             this.emailConfig = emailConfig;
         }
+       
+
         public async Task sendMessageAsync(string message, string recipient)
         {
-            using ( var client = new SmtpClient())
+            using (var client = new SmtpClient())
             {
-                
-                    
-                    client.Connect(emailConfig.Host, emailConfig.Port, true);
+                try
+                {
+                    await client.ConnectAsync(emailConfig.Host, emailConfig.Port, true);
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    client.Authenticate(emailConfig.Mail, emailConfig.Password);
+                    await client.AuthenticateAsync(emailConfig.Mail, emailConfig.Password);
                     var ms = new MimeMessage();
                     ms.From.Add(MailboxAddress.Parse(emailConfig.Mail));
                     ms.To.Add(MailboxAddress.Parse(recipient));
                     ms.Subject = "Activation Account";
-                    ms.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = message};
-                    client.Send(ms);
-                    client.Disconnect(true);
+                    ms.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = message };
+                    await client.SendAsync(ms);
+                    await client.DisconnectAsync(true);
                     client.Dispose();
-                    
+                }catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+               
+
+
+
             }
         }
     }

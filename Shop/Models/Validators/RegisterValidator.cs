@@ -11,14 +11,14 @@ namespace Shop.Models.Validators
            
             RuleFor(x => x.Email)
                  .EmailAddress();
-            //RuleFor(x => x.Email)
-            //    .Custom((value, message) =>
-            //    {
-            //        if(db.User.Any( u => u.Email == value))
-            //        {
-            //            message.AddFailure("Email addres is already taken");
-            //        }
-            //    });
+            RuleFor(x => x.Email)
+                .Custom((value, message) =>
+                {
+                    if (db.User.Any(u => u.Email == value))
+                    {
+                        message.AddFailure("Email addres is already taken");
+                    }
+                });
             RuleFor(x => x.Password)
                 .MinimumLength(6)
                 .MaximumLength(20);

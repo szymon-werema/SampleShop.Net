@@ -21,9 +21,12 @@ var emailConfig = builder.Configuration.GetSection("MailSettings").Get<EmailConf
 
 builder.Services.AddAuthentication(option =>
 {
-    option.DefaultAuthenticateScheme = "Bearer";
-    option.DefaultScheme = "Bearer";
-    option.DefaultChallengeScheme = "Bearer";
+    option.DefaultScheme = "JWT_OR_COOKIE";
+    option.DefaultChallengeScheme = "JWT_OR_COOKIE";
+}).AddCookie("Cookies", options =>
+{
+    options.LoginPath = "/login";
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
 }).AddJwtBearer( cfg =>
 {
     cfg.RequireHttpsMetadata = false;
@@ -36,7 +39,20 @@ builder.Services.AddAuthentication(option =>
         
        
     };
-});
+}).AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
+{
+    
+    options.ForwardDefaultSelector = context =>
+    {
+        
+        string authorization = context.Request.Headers["Authorization"];
+        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+            return "Bearer";
+
+        
+        return "Cookies";
+    };
+}); 
 builder.Services.AddSingleton(jwtConfig);
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddControllersWithViews();
@@ -65,6 +81,7 @@ builder.Services.AddScoped<AccountMenager>();
 //Claims
 builder.Services.AddScoped<IClaimsUser<ClaimsRegister>, ClaimsRegister>();
 builder.Services.AddScoped<IClaimsUser<ClaimsAddByAdmin>, ClaimsAddByAdmin>();
+builder.Services.AddScoped<IClaimsUser<ClaimsLogin>, ClaimsLogin>();
 
 //Register
 builder.Services.AddScoped<IRegister<UserRegisterForm> , RegisterClient>();
