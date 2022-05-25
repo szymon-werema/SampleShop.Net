@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Models.Register;
 using Shop.Models.Forms;
 using Shop.Models.Authenticate;
-
+using Shop.Models.Messenger;
 
 namespace Shop.Controllers
 {
@@ -12,12 +12,17 @@ namespace Shop.Controllers
       
         private readonly IRegister<UserRegisterForm> register;
         private readonly IToken<TokenRegister> tokenJWT;
+        private readonly IMessenger<EmailMessageActivation> messenger;
 
-        public RegisterController(IRegister<UserRegisterForm> register, IToken<TokenRegister> tokenJWT)
+        public RegisterController(IRegister<UserRegisterForm> register, 
+            IToken<TokenRegister> tokenJWT,
+            IMessenger<EmailMessageActivation> messenger 
+            )
         {
             
             this.register = register;
             this.tokenJWT = tokenJWT;
+            this.messenger = messenger;
         }
 
         [HttpGet("Register")]
@@ -40,10 +45,7 @@ namespace Shop.Controllers
                 
                 await register.RegisterAsync(user);
                
-                var token = tokenJWT.generateToken(user.Email);
-                Console.WriteLine(token);
-                
-                //HttpContext.Session.SetString("Token", token.ToString());
+                Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> "  + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("RegisterActivate", "Activation",  new { token = tokenJWT.generateToken(user.Email) }), user.Email));
                 return View("Views/Register/SuccesRegister.cshtml");
             }
 

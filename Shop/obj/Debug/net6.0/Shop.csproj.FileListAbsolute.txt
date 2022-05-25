@@ -290,3 +290,7 @@ D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\libman.json
 D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\PasswordGenerator.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\MailKit.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\MimeKit.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\NETCore.MailKit.dll
+D:\Git\SampleShop.Net\Shop\bin\Debug\net6.0\BouncyCastle.Crypto.dll

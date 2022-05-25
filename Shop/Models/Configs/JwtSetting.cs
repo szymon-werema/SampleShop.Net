@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Models.Jwt
+namespace Shop.Models.Configs
 {
     public class JwtSetting
     {

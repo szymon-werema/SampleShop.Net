@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Shop.Entities;
-using Shop.Models.Jwt;
+using Shop.Models.Configs;
 using Shop.Models.Register;
 namespace Shop.Models.Authenticate
 {

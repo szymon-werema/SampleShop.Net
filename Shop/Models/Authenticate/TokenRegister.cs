@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Shop.Models.Jwt;
+using Shop.Models.Configs;
 using Shop.Entities;
 namespace Shop.Models.Authenticate
 {

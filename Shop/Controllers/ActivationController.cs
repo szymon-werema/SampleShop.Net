@@ -41,7 +41,8 @@ namespace Shop.Controllers
         {
             if (!tokenJWT.veryfyToken(token)) return View("BadToken");
             List<Claim> claims = tokenJWT.getClaims(token);
-            if (claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod) == null) return RedirectToAction("ActivateAccountPassword", "RegisterActivate", new { token = form.Token });
+            Console.WriteLine(claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod));
+            if (!claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod)) return RedirectToAction("RegisterActivate", "Activation", new { token = token });
             string email = claims.Find(x => x.Type == ClaimTypes.Email).Value;
             if (accountMenager.CheackActivation(email)) return View("AlreadyActivated");
             return View(new SetPasswordForm() { Token = token});
@@ -51,7 +52,7 @@ namespace Shop.Controllers
         {
             if (!tokenJWT.veryfyToken(form.Token)) return View("BadToken");
             List<Claim> claims = tokenJWT.getClaims(form.Token);
-            if (claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod) == null) return RedirectToAction("ActivateAccountPassword", "RegisterActivate", new { token = form.Token });
+            if (!claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod)) return RedirectToAction("RegisterActivate", "Activation", new { token = form.Token });
             string email = claims.Find(x => x.Type == ClaimTypes.Email).Value;
             if(accountMenager.CheackActivation(email)) return View("AlreadyActivated");
             accountMenager.ChangePasswordAsync(email, form.Password);

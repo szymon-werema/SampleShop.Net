@@ -4,6 +4,7 @@ using Shop.Entities;
 using Shop.Models.Register;
 using Shop.Models.Authenticate;
 using Shop.Models.Forms;
+using Shop.Models.Messenger;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
@@ -14,18 +15,21 @@ namespace Shop.Controllers
         private readonly LocalDbContext db;
         private readonly IRegister<AddUserForm> register;
         private readonly IToken<TokenByAdmin> tokenJWT;
+        private readonly IMessenger<EmailMessageActivation> messenger;
 
         public AdminPanelController(LocalDbContext db,
             IRegister<AddUserForm> register,
-            IToken<TokenByAdmin> tokenJWT
+            IToken<TokenByAdmin> tokenJWT,
+            IMessenger<EmailMessageActivation> messenger
             )
         {
             this.db = db;
             this.register = register;
             this.tokenJWT = tokenJWT;
+            this.messenger = messenger;
         }
+
         [HttpGet]
-        
         public ActionResult AddUser()
         {
 
@@ -38,8 +42,7 @@ namespace Shop.Controllers
         {
            
             register.RegisterAsync(user);
-            var token = tokenJWT.generateToken(user.Email);
-            Console.WriteLine(token);
+            Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("ActivateAccountPassword", "Activation", new { token = tokenJWT.generateToken(user.Email) }), user.Email));
             return View();
         }
 

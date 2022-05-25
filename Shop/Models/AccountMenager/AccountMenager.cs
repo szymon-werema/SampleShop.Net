@@ -39,6 +39,13 @@ namespace Shop.Models.AccountMenager
             return u.isActive;
         }
 
+        public bool CheackPassword(string password, string email)
+        {
+            var user = findUser(email);
+            if(passwordHasher.VerifyHashedPassword(user,user.Password,password)== PasswordVerificationResult.Failed) return false;
+            return true;
+        }
+
 
     }
 }

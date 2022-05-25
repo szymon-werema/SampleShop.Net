@@ -5,17 +5,19 @@ using Shop.Models.Register;
 using Shop.Models.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Shop.Models.Jwt;
+using Shop.Models.Messenger;
 using Shop.Models.Authenticate;
 using Shop.Models.AccountMenager;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Shop.Models.Configs;
 using Shop.Models.Forms;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var jwtConfig = new JwtSetting();
-builder.Configuration.GetSection("Authentication").Bind(jwtConfig);
+var jwtConfig = builder.Configuration.GetSection("Authentication").Get<JwtSetting>();
+var emailConfig = builder.Configuration.GetSection("MailSettings").Get<EmailConfig>();
+
 
 builder.Services.AddAuthentication(option =>
 {
@@ -36,6 +38,7 @@ builder.Services.AddAuthentication(option =>
     };
 });
 builder.Services.AddSingleton(jwtConfig);
+builder.Services.AddSingleton(emailConfig);
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<LocalDbContext>(
@@ -47,8 +50,12 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 
 //Validators
-
+builder.Services.AddScoped<IValidator<SetPasswordForm>, SetPasswordValidator>();
 builder.Services.AddScoped<IValidator<UserRegisterForm>, RegisterValidator>();
+builder.Services.AddScoped<IValidator<AddUserForm>, AddUserValidator>();
+
+//Messnger
+builder.Services.AddScoped<IMessenger<EmailMessageActivation>, EmailMessageActivation>();
 
 //Tokens
 builder.Services.AddScoped<IToken<TokenByAdmin> , TokenByAdmin>();

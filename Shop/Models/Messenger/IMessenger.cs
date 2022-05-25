@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Shop.Models.Messenger
 {
-    public interface IMessenger
+    public interface IMessenger <T>
     {
-        public void sendMessage(string message, string recipient);
+        public Task sendMessageAsync(string message, string recipient);
     }
 }
