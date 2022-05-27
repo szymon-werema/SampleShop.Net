@@ -9,5 +9,8 @@ namespace Shop.Models.Forms
         public string Password { get; set; }
         public string ComfirmPassword { get; set; }
         public int UserRoleId { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateOnly DateOfBirth { get; set; }
+
     }
 }

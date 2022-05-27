@@ -25,6 +25,8 @@ namespace Shop.Models.Register
                 Password = user.Password,
                 FristName = user.FristName,
                 LastName = user.LastName,
+               
+                PhoneNumber = user.PhoneNumber,
                 UserRoleId = 1
             };
 

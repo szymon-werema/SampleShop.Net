@@ -35,6 +35,9 @@ namespace Shop.Models.Validators
             RuleFor(x => x.UserRoleId)
                 .NotEmpty()
                 .NotNull();
+            RuleFor(x =>x.PhoneNumber)
+                .NotNull();
+            
         }
     }
 }

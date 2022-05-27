@@ -6,7 +6,7 @@ using Shop.Entities;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
 {
@@ -34,11 +34,16 @@ namespace Shop.Controllers
         
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated) return BadRequest();
+
             return View(new LogInForm());
         }
         [HttpPost]
         public async Task<ActionResult> Login(LogInForm form)
         {
+            if (User.Identity.IsAuthenticated) return BadRequest();
+            if (!ModelState.IsValid) return View();
+            
             if (accountMenager.findUser(form.Email) == null)
             {
                 ViewBag.ErrorMessage = "Bad login or password";
@@ -70,14 +75,15 @@ namespace Shop.Controllers
 
 
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         [HttpGet]
-        public ActionResult LogOut()
+        public async Task<ActionResult> LogOut()
         {
-            
-            
-            return View();
+            if (!User.Identity.IsAuthenticated) return BadRequest();
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
 
     }

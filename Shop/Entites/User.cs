@@ -17,6 +17,7 @@ namespace Shop.Entities
         public int UserRoleId { get; set; }
         public bool isActive { get; set; } = false;
         public Address Address { get; set; } = null;
-
+        public string PhoneNumber { get; set; }
+       
     }
 }

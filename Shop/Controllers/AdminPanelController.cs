@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminPanelController : Controller
     {
         private readonly LocalDbContext db;
@@ -32,22 +32,26 @@ namespace Shop.Controllers
         [HttpGet]
         public ActionResult AddUser()
         {
-
-            ViewBag.UserRoleId = new SelectList(db.UserRole.ToDictionary(role => role.Id, role => role.Name),"Key", "Value");
+            if(!ModelState.IsValid)
+            {
+                ViewBag.UserRoleId = new SelectList(db.UserRole.ToDictionary(role => role.Id, role => role.Name), "Key", "Value");
+                return View();
+            }
             return View(new AddUserForm());
 
         }
         [HttpPost]
         public ActionResult AddUser(AddUserForm user)
         {
-           if(ModelState.IsValid)
+            ViewBag.UserRoleId = new SelectList(db.UserRole.ToDictionary(role => role.Id, role => role.Name), "Key", "Value");
+
+            if (ModelState.IsValid)
            {
                 register.RegisterAsync(user);
                 string token = tokenJWT.generateToken(user.Email);
                 Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("ActivateAccountPassword", "Activation", new { token = token }), user.Email));
                 return View();
            }
-           ViewBag.UserRoleId = new SelectList(db.UserRole.ToDictionary(role => role.Id, role => role.Name), "Key", "Value");
            return View();
 
         }

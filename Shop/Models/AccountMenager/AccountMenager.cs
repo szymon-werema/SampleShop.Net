@@ -46,6 +46,23 @@ namespace Shop.Models.AccountMenager
             return true;
         }
 
-
+        public async Task changeFirstName(string email, string firstname)
+        {
+            var user = findUser(email);
+            user.FristName = firstname;
+            await db.SaveChangesAsync();
+        }
+        public async Task changeLastName(string email, string lastname)
+        {
+            var user = findUser(email);
+            user.LastName = lastname;
+            await db.SaveChangesAsync();
+        }
+        public async Task changePhonenumber(string email, string phonenumber)
+        {
+            var user = findUser(email);
+            user.PhoneNumber = phonenumber;
+            await db.SaveChangesAsync();
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace Shop.Controllers
         public ActionResult RegisterActivate(string token)
         {
             
+
             if (!tokenJWT.veryfyToken(token)) return View("BadToken");
             List<Claim> claims = tokenJWT.getClaims(token);
             string email = claims.Find(x => x.Type == ClaimTypes.Email).Value;

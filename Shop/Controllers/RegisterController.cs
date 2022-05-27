@@ -27,29 +27,27 @@ namespace Shop.Controllers
             this.messenger = messenger;
         }
 
-        [HttpGet("Register")]
+        [HttpGet]
         public ActionResult Register()
         {
-            
-            return View("Views/Register/Register.cshtml",new UserRegisterForm());
+            if (User.Identity.IsAuthenticated) return BadRequest();
+            return View(new UserRegisterForm());
         }
 
-        [HttpPost("Register")]
+        [HttpPost]
         public async Task<ActionResult> RegisterAsync(UserRegisterForm user)
         {
-            //foreach (string key in Request.Form.Keys)
-            //{
-            //    Console.WriteLine(key);
-
-            //}
-            if(ModelState.IsValid)
+           
+            if (User.Identity.IsAuthenticated) return BadRequest();
+            if (ModelState.IsValid)
             {
-                
+               
                 await register.RegisterAsync(user);
                 string token = tokenJWT.generateToken(user.Email);
+
+                Task.Run(() => messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("RegisterActivate", "Activation", new { token = token }), user.Email));
                 
-                await messenger.sendMessageAsync("To active your account click on link below <br> " + $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + this.Url.Action("RegisterActivate", "Activation", new { token = token }), "lolxwot@gmail.com");
-                return View("Views/Register/SuccesRegister.cshtml");
+                return View("SuccesRegister");
             }
 
             ViewBag.ErrorMessage = ModelState.Values.SelectMany(v => v.Errors).Select(m => m.ErrorMessage);

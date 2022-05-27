@@ -26,7 +26,9 @@ namespace Shop.Models.Authenticate
                  new Claim(ClaimTypes.Role, db.UserRole
                  .Where(u => u.Id == user.UserRoleId)
                  .Select(r => r.Name).First()),
-                 new Claim(ClaimTypes.Email, user.Email.ToString())
+                 new Claim(ClaimTypes.Email, user.Email.ToString()),
+                 new Claim(ClaimTypes.Name, user.FristName),
+                 new Claim("LastName", user.FristName)
             };
         }
     }

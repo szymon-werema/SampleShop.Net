@@ -15,6 +15,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Git\SampleShop.Net\Shop
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Git/SampleShop.Net/Shop/Views/Account/FindUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGaW5kVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Account/MyAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxNeUFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git/SampleShop.Net/Shop/Views/Account/SetAddress.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTZXRBZGRyZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Git/SampleShop.Net/Shop/Views/Activation/ActivateAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZhdGlvblxBY3RpdmF0ZUFjY291bnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

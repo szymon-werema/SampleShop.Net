@@ -34,6 +34,9 @@ namespace Shop.Models.Validators
                 .NotEmpty()
                 .MinimumLength(3)
                 .MaximumLength(30);
+            RuleFor(x => x.PhoneNumber)
+               .NotNull();
+           
 
         }
 

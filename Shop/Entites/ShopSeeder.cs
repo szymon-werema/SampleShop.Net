@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,13 @@ namespace Shop.Entities
     public class ShopSeeder
     {
         private readonly ModelBuilder modelBuilder;
-       
+        private readonly IPasswordHasher<User> passwordHasher;
 
-        public ShopSeeder(ModelBuilder modelBuilder)
+        public ShopSeeder(ModelBuilder modelBuilder,
+            IPasswordHasher<User> passwordHasher)
         {
             this.modelBuilder = modelBuilder;
-            
+            this.passwordHasher = passwordHasher;
         }
         public void SeedDatabase()
         {
@@ -56,10 +58,7 @@ namespace Shop.Entities
                     Id = 2,
                     Name = "Admin"
                 },
-                new UserRole(){
-                    Id = 3,
-                    Name = "Seller"
-                }
+               
             };
             return roles;
         }
@@ -71,11 +70,12 @@ namespace Shop.Entities
                 Id = 1,
                 FristName = "Admin",
                 LastName = "Admin",
-                Email = "admin@local.pl",
-                Password = "",
-                UserRoleId = 2
+                Email = "admin@local.pl", 
+                PhoneNumber ="000000",
+                UserRoleId = 2,
+                isActive = true
             };
-            
+            user.Password = passwordHasher.HashPassword(user, "haslo");
             return user;
         }
     }

@@ -30,6 +30,8 @@ namespace Shop.Models.Register
                 FristName = user.FristName,
                 Password = "",
                 LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+               
                 UserRoleId = user.UserRoleId
             };
             
