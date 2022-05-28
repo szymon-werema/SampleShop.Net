@@ -13,10 +13,11 @@ namespace Shop.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public UserRole UserRole { get; set; }
+        public UserRole? UserRole { get; set; }
         public int UserRoleId { get; set; }
         public bool isActive { get; set; } = false;
-        public Address Address { get; set; } = null;
+        public int? AddressId { get; set; }
+        public Address? Address { get; set; } =null;
         public string PhoneNumber { get; set; }
        
     }

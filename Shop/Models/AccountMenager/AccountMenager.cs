@@ -64,5 +64,23 @@ namespace Shop.Models.AccountMenager
             user.PhoneNumber = phonenumber;
             await db.SaveChangesAsync();
         }
+        public async Task setAddress(string email, Address addres)
+        {
+            var user = findUser(email);
+            addres.UserId = user.Id;
+            await db.Address.AddAsync(addres);
+            user.AddressId=addres.Id;
+            await db.SaveChangesAsync();
+        }
+        public async Task updateAddress(string email, Address addres)
+        {
+            var user = findUser(email);
+            Address a = db.Address.Where(x => x.UserId == user.Id).FirstOrDefault();
+            a.Street = addres.Street;
+            a.City = addres.City;
+            a.HouseNumber = addres.HouseNumber;
+            a.ApartamentNumber = addres.ApartamentNumber;
+            await db.SaveChangesAsync();
+        }
     }
 }

@@ -69,6 +69,7 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<SetPasswordForm>, SetPasswordValidator>();
 builder.Services.AddScoped<IValidator<UserRegisterForm>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<AddUserForm>, AddUserValidator>();
+builder.Services.AddScoped<IValidator<AccountForm>, AccountFormValidator>();
 
 //Messnger
 builder.Services.AddScoped<IMessenger<EmailMessageActivation>, EmailMessageActivation>();
