@@ -3,7 +3,7 @@ using Shop.Entities;
 using Shop.Models.Forms;
 using System.Security.Claims;
 using System.Security.Principal;
-using Shop.Models.AccountMenager;
+using Shop.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
@@ -35,7 +35,6 @@ namespace Shop.Controllers
                 User = u,
                 Address = db.Address.Where(a => a.UserId == u.Id).FirstOrDefault()
             };
-            
             return View(form);
         }
         [HttpPost]
@@ -62,7 +61,7 @@ namespace Shop.Controllers
            
             if(u == null) return BadRequest();
             form.User= u;
-            if (form.User.AddressId != null) form.Address = db.Address.Where(a => a.UserId == u.Id).First();
+            if (form.User.Address != null) form.Address = db.Address.Where(a => a.UserId == u.Id).First();
             return View(form);
             
 
@@ -81,18 +80,35 @@ namespace Shop.Controllers
                 return RedirectToAction("MyAccount", "Account");
             }
             
-            if (form.User.AddressId == null)
+            if (form.User.Address == null)
             {
-                Console.WriteLine("_____________________________________________1");
+                
                 accountMenager.setAddress(form.User.Email, form.Address);
             }else
             {
-                Console.WriteLine("_____________________________________________2");
+                
                 accountMenager.updateAddress(form.User.Email, form.Address);
             }
             return RedirectToAction("MyAccount", "Account");
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Bucket()
+        {
+            int bucketId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "BucketId").Value);
+           
+            return View(await accountMenager.getBucket(bucketId));
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> ClearBucket(int id)
+        {
+
+
+            accountMenager.clearBucket(id);
+            return RedirectToAction("Bucket", "Account");
+        }
 
     }
 }

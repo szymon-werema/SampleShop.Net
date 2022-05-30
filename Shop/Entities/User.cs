@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,10 @@ namespace Shop.Entities
         public UserRole? UserRole { get; set; }
         public int UserRoleId { get; set; }
         public bool isActive { get; set; } = false;
-        public int? AddressId { get; set; }
         public Address? Address { get; set; } =null;
         public string PhoneNumber { get; set; }
+        public List<Item> Item { get; set; } =new List<Item>();
+        public Bucket? Bucket { get; set; }
        
     }
 }

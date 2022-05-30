@@ -31,7 +31,7 @@ namespace Shop.Models.Register
                 Password = "",
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-               
+                Bucket=new Bucket(),
                 UserRoleId = user.UserRoleId
             };
             

@@ -7,7 +7,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Shop.Models.Messenger;
 using Shop.Models.Authenticate;
-using Shop.Models.AccountMenager;
+using Shop.Models.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Shop.Models.Configs;
@@ -70,6 +70,7 @@ builder.Services.AddScoped<IValidator<SetPasswordForm>, SetPasswordValidator>();
 builder.Services.AddScoped<IValidator<UserRegisterForm>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<AddUserForm>, AddUserValidator>();
 builder.Services.AddScoped<IValidator<AccountForm>, AccountFormValidator>();
+builder.Services.AddScoped<IValidator<ItemForm>, AddItemValidator>();
 
 //Messnger
 builder.Services.AddScoped<IMessenger<EmailMessageActivation>, EmailMessageActivation>();
@@ -77,7 +78,7 @@ builder.Services.AddScoped<IMessenger<EmailMessageActivation>, EmailMessageActiv
 //Tokens
 builder.Services.AddScoped<IToken<TokenByAdmin> , TokenByAdmin>();
 builder.Services.AddScoped<IToken<TokenRegister> , TokenRegister>();
-builder.Services.AddScoped<AccountMenager>();
+
 
 //Claims
 builder.Services.AddScoped<IClaimsUser<ClaimsRegister>, ClaimsRegister>();
@@ -87,6 +88,10 @@ builder.Services.AddScoped<IClaimsUser<ClaimsLogin>, ClaimsLogin>();
 //Register
 builder.Services.AddScoped<IRegister<UserRegisterForm> , RegisterClient>();
 builder.Services.AddScoped<IRegister<AddUserForm>, RegisterByAdmin>();
+//Services
+builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<ShopService>();
+builder.Services.AddScoped<AccountMenager>();
 
 var app = builder.Build();
 

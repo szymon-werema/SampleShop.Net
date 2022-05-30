@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using Shop.Entities;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +28,9 @@ namespace Shop.Models.Authenticate
                  .Select(r => r.Name).First()),
                  new Claim(ClaimTypes.Email, user.Email.ToString()),
                  new Claim(ClaimTypes.Name, user.FristName),
-                 new Claim("LastName", user.FristName)
+                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                 new Claim("LastName", user.FristName),
+                 new Claim("BucketId", db.Buckets.Where( b => b.UserId == user.Id).Select(b => b.Id).First().ToString())
             };
         }
     }

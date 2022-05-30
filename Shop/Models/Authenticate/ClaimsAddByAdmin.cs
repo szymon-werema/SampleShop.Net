@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shop.Entities;
 using Shop.Models.Register;
-using Shop.Entities;
+
 
 namespace Shop.Models.Authenticate
 {

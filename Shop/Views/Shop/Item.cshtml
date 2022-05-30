@@ -1,0 +1,70 @@
+﻿@model Shop.Entities.Item
+
+@{
+    ViewData["Title"] = "ItemInfo";
+}
+
+<h1>ItemInfo</h1>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ammount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ammount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Owner
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.FristName)
+            @Html.DisplayFor(model => model.User.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+        
+        
+        
+        
+    </dl>
+    <div class="row">
+    @foreach(var img in Model.Images)
+    {
+        <div class="col-md-6 col-lg-4 mt-2 mb-2">
+            <img src="@img.Path" class="img-thumbnail" />
+        </div>
+    }
+    </div>
+
+</div>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Models.Authenticate;
-using Shop.Models.AccountMenager;
+using Shop.Models.Services;
 using System.Security.Claims;
 using Shop.Entities;
 using Shop.Models.Forms;
@@ -45,7 +45,7 @@ namespace Shop.Controllers
         {
             if (!tokenJWT.veryfyToken(token)) return View("BadToken");
             List<Claim> claims = tokenJWT.getClaims(token);
-            Console.WriteLine(claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod));
+            
             if (!claims.Any(x => x.Type == ClaimTypes.AuthenticationMethod)) return RedirectToAction("RegisterActivate", "Activation", new { token = token });
             string email = claims.Find(x => x.Type == ClaimTypes.Email).Value;
             if (accountMenager.CheackActivation(email)) return View("AlreadyActivated");

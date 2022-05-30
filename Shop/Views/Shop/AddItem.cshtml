@@ -1,0 +1,114 @@
+﻿@model Shop.Models.Forms.ItemForm
+
+@{
+    ViewData["Title"] = "AddItem";
+}
+
+<h1 style="text-align:center;"> Add item</h1>
+
+
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-3">
+        <form asp-action="AddItem" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ammount" class="control-label"></label>
+                <input asp-for="Ammount" value="1" class="form-control" />
+                <span asp-validation-for="Ammount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <textarea  asp-for="ShortDescription" class="form-control" ></textarea>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea  asp-for="Description" class="form-control" ></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Images" class="control-label"></label>
+                <input asp-for="Images" id="files" multiple accept="image/*" type="file" class="form-control" />
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
+            <div class="form-group ">
+                <label asp-for="Miniature" class="control-label"></label>
+                <input asp-for="Miniature" value="0" class="form-control d-none" />
+                <span asp-validation-for="Miniature" class="text-danger"></span>
+            </div>
+            <div class="row" id="result">
+
+            </div>
+             
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary mt-3" />
+            </div>
+        </form>
+       
+    </div>
+</div>
+
+<div style="text-align:center;"class="mt-2 mb-2">
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+document.querySelector("#files").addEventListener("change", (e) => { //CHANGE EVENT FOR UPLOADING PHOTOS
+  if (window.File && window.FileReader && window.FileList && window.Blob) { //CHECK IF FILE API IS SUPPORTED
+    const files = e.target.files; //FILE LIST OBJECT CONTAINING UPLOADED FILES
+    const output = document.querySelector("#result");
+    output.innerHTML = "";
+    for (let i = 0; i < files.length; i++) { // LOOP THROUGH THE FILE LIST OBJECT
+        if (!files[i].type.match("image")) continue; // ONLY PHOTOS (SKIP CURRENT ITERATION IF NOT A PHOTO)
+        const picReader = new FileReader(); // RETRIEVE DATA URI 
+        picReader.addEventListener("load", function (event) { // LOAD EVENT FOR DISPLAYING PHOTOS
+          const picFile = event.target;
+          const div = document.createElement("div");
+          div.className="col-lg-4 mt-3 mb-3 ";
+          if(i!=0)
+          {
+            div.innerHTML = `
+          <label class="ImageRadioButtonItem"> 
+              <input type="radio" value="${i}" name="Miniature"  onclick="doSomething(${i})" />
+              <img class="img-fluid rounded " src="${picFile.result}" title="${picFile.name}"/>
+          </label>
+          `;
+          }else
+          {
+           div.innerHTML = `
+          <label class="ImageRadioButtonItem"> 
+              <input checked type="radio" value="${i}" name="Miniature"  onclick="doSomething(${i})" />
+              <img class="img-fluid rounded " src="${picFile.result}" title="${picFile.name}"/>
+          </label>
+          `;
+          }
+          
+          output.appendChild(div);
+        });
+        picReader.readAsDataURL(files[i]); //READ THE IMAGE
+    }
+  } else {
+    alert("Your browser does not support File API");
+  }
+});
+
+function doSomething(e) {
+    document.getElementById("Miniature").value = e;
+}
+</script>

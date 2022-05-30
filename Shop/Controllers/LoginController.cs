@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Models.Forms;
-using Shop.Models.AccountMenager;
+using Shop.Models.Services;
 using Shop.Models.Authenticate;
 using Shop.Entities;
 using System.Security.Claims;

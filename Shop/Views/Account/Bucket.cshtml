@@ -1,0 +1,61 @@
+﻿@model Shop.Entities.Bucket
+
+@{
+    ViewData["Title"] = "Bucket";
+}
+
+<h1>Bucket</h1>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+       
+        @foreach(var item in Model.Items)
+        {
+        <dt class = "col-sm-2">
+            Name
+        </dt>
+        <dd class = "col-sm-10">
+            @item.Name
+        </dd>
+        <dt class = "col-sm-2">
+            Owner
+        </dt>
+        <dd class = "col-sm-10">
+            @item.User.FristName
+            @item.User.LastName
+        </dd>
+        <dt class = "col-sm-2">
+            Ordered
+        </dt>
+        <dd class = "col-sm-10">
+            @item.Ammount
+            
+        </dd>
+        <dt class = "col-sm-2">
+            Price
+        </dt>
+        <dd class = "col-sm-10">
+            @item.Price
+        </dd>
+        <dt class = "col-sm-2">
+            Total price
+        </dt>
+        <dd class = "col-sm-10">
+            @(item.Price*item.Ammount)
+        </dd>
+        <dt class = "col-sm-2">
+            
+        </dt>
+        <dd class = "col-sm-10">
+            <img class="img-thumbnail" height="300px" width="300px" src="@item.Images.First().Path"/>
+        </dd>
+        <hr class="mt-3 mb-3"/>
+        }
+    </dl>
+</div>
+<div class="mt-3 mb-3">
+    <a asp-action="ClearBucket" asp-route-id="@Model.Id">Clear bucket</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

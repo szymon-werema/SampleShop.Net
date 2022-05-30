@@ -75,3 +75,16 @@ body {
 .fa-star {
     color: #fcba03;
 }
+
+
+
+.ImageRadioButtonItem > input{
+    display: none;
+}
+
+.ImageRadioButtonItem input:checked + img {
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 10px 30px 0 #616060;
+    -moz-box-shadow: 0 10px 30px 0 #616060;
+    box-shadow: 0 10px 30px 0 #616060;
+}

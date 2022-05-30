@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+
 using Shop.Entities;
 using Shop.Models.Forms;
 
@@ -18,14 +19,14 @@ namespace Shop.Models.Register
 
         public async Task RegisterAsync(UserRegisterForm user)
         {
-            
+
             var newUser = new User()
             {
                 Email = user.Email,
                 Password = user.Password,
                 FristName = user.FristName,
                 LastName = user.LastName,
-               
+                Bucket = new Bucket(),
                 PhoneNumber = user.PhoneNumber,
                 UserRoleId = 1
             };

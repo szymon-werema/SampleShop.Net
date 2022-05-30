@@ -31,18 +31,35 @@ namespace Shop.Entities
                 .HasData(GetRoles()); 
            });
 
+            modelBuilder.Entity<Category>(eb =>
+            {
+                eb.ToTable("Categories")
+                .HasData(GetCategories());
+            });
+                
             modelBuilder.Entity<User>(eb =>
             {
-               
-
                 eb.HasOne(u => u.Address)
                .WithOne(a => a.User)
                .HasForeignKey<Address>(a => a.UserId);
                 eb.ToTable("Users")
                .HasData(GetUser());
             });
-                
-                
+            modelBuilder.Entity<Bucket>(eb =>
+            {
+                eb.ToTable("Buckets").HasData(new Bucket() { Id=1, UserId=1});
+            });
+        }
+        private List<Category> GetCategories()
+        {
+            return new List<Category>()
+            {
+                new Category(){ Id = 1, Name = "Tables"},
+                new Category(){ Id = 2, Name = "Monitors"},
+                new Category(){ Id = 3, Name = "Pc"},
+                new Category(){ Id = 4, Name = "Books"},
+                new Category(){ Id = 5, Name = "Others"}
+            };
         }
         private List<UserRole> GetRoles()
         {
@@ -70,7 +87,7 @@ namespace Shop.Entities
                 Id = 1,
                 FristName = "Admin",
                 LastName = "Admin",
-                Email = "admin@local.pl", 
+                Email = "admin@local.pl",
                 PhoneNumber ="000000",
                 UserRoleId = 2,
                 isActive = true
