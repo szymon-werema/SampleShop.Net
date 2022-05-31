@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Shop.Entities.Item>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,47 +9,36 @@
 <br/>
 
  <div class="row">
-        <div class="col-md-6 col-lg-4 item">
-            
-                <div class="image">
-                    <img src="https://thumbs.dreamstime.com/z/ekspresowy-kuriera-sda-22481900.jpg" alt="">
-                </div>
-                <hr />
-                
-                <div class="item-details">
-                    <h5>Podkaszarka</h5>
+    
+             @foreach(var item in Model)
+                {
+                    <div class="col-md-6 col-lg-4 item">
+                    <form asp-action="item" asp-controller="Shop" asp-route-id="@item.Id" > 
+                        <button type="submit" class="border border-white">
                     
-                    <div class="shorDescription">d asd asd as das das da sd asd asd das das das da sd asd asda sd
-                        asdasdasd asd as das das das das d
-                         das dsad asd asd asd 
-                    </div>
-                    <div><strong> Price: </strong> 130</div>
-                    <div><strong>Seller: </strong><a>Profil Detail</a></div>
-                </div>
             
-        </div>
-         <div class="col-md-6 col-lg-4 item">
-            
-                <div class="image">
-                <img src="https://st3.depositphotos.com/26374354/32286/v/1600/depositphotos_322862778-stock-illustration-initials-vb-logo-abstract-vector.jpg" alt="">
-                </div>
-                <hr />
+                            <div class="image">
+                                <img src="@item.Images.ElementAt(item.Miniature).Path" alt="">
+                            </div>
+                            <hr />
                 
-                <div class="item-details">
-                    <h5>Podkaszarka</h5>
+                            <div class="item-details">
+                                <h5>@item.Name</h5>
                     
-                    <div class="shorDescription">d asd asd as das das da sd asd asd das das das da sd asd asda sd
-                        asdasdasd asd as das das das das d
-                         das dsad asd asd asd 
-                    </div>
-                    <div class="price">Price: 130</div>
-                </div>
-
+                                <div class="shorDescription">
+                                    @item.ShortDescription
+                                </div>
+                                <div><strong> Price: </strong> @item.Price</div>
+                                <div><strong> Ammount: </strong> @item.Ammount</div>
+                                <div><strong>Seller: </strong><a>@item.User.LastName @item.User.FristName</a></div>
+                            </div>
             
-        </div>
-        
-
-        
+                      
+                     </button>
+                </form>
+                </div>
+             }
+               
       
-        
+  
 </div>

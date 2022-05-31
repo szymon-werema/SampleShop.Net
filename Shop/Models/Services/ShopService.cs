@@ -49,7 +49,8 @@ namespace Shop.Models.Services
             if(bi == null)
             {
                 
-                b.Items.Add(item);
+                
+                db.BucketItems.Add(new BucketItem() { Ammount = ammout, ItemId=item.Id, BucketId= bucketId});
             }else
             {
                 if(item.Ammount - bi.Ammount - ammout < 0) throw new Exception("Sold out");
@@ -57,6 +58,12 @@ namespace Shop.Models.Services
                 bi.Ammount += ammout;
             }
             await db.SaveChangesAsync();
+        }
+        public async Task addCategory(CategoryForm categoryForm)
+        {
+
+            db.Categories.AddAsync(new Category() { Name = categoryForm.Name });
+            db.SaveChangesAsync();
         }
        
     }

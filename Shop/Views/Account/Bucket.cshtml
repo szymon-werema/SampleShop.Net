@@ -10,7 +10,8 @@
     
     <hr />
     <dl class="row">
-       
+    @if(Model.Items != null)
+    {
         @foreach(var item in Model.Items)
         {
         <dt class = "col-sm-2">
@@ -51,7 +52,9 @@
         <dd class = "col-sm-10">
             <img class="img-thumbnail" height="300px" width="300px" src="@item.Images.First().Path"/>
         </dd>
+        <a asp-action="RemoveItem" asp-route-itemid="@item.Id" asp-route-bucketid="@Model.Id"><button  type="button" class="btn btn-danger w-25">Remove item</button></a>
         <hr class="mt-3 mb-3"/>
+        }
         }
     </dl>
 </div>

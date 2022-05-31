@@ -111,5 +111,11 @@ namespace Shop.Models.Services
             db.BucketItems.RemoveRange(db.BucketItems.Where(bi => bi.BucketId == idBucket).ToList());
             db.SaveChangesAsync();
         }
+        public async Task deleteBucket(int itemid, int bucketid)
+        {
+            db.BucketItems.RemoveRange(db.BucketItems.Where(bi => bi.BucketId == bucketid)
+                .Where(bi => bi.ItemId == itemid));
+            db.SaveChangesAsync();
+        }
     }
 }

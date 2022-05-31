@@ -37,11 +37,18 @@
                 <textarea  asp-for="Description" class="form-control" ></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            
-            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <a asp-action="addCategory">
+                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+                    Add Category
+                </button>
+                </a>
+              </div>
+             <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
+           
             
             <div class="form-group">
                 <label asp-for="Images" class="control-label"></label>
@@ -63,6 +70,27 @@
         </form>
        
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div style="text-align:center;"class="mt-2 mb-2">
@@ -111,4 +139,5 @@ document.querySelector("#files").addEventListener("change", (e) => { //CHANGE EV
 function doSomething(e) {
     document.getElementById("Miniature").value = e;
 }
+$('#exampleModal').modal('show')
 </script>

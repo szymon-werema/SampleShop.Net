@@ -71,6 +71,7 @@ builder.Services.AddScoped<IValidator<UserRegisterForm>, RegisterValidator>();
 builder.Services.AddScoped<IValidator<AddUserForm>, AddUserValidator>();
 builder.Services.AddScoped<IValidator<AccountForm>, AccountFormValidator>();
 builder.Services.AddScoped<IValidator<ItemForm>, AddItemValidator>();
+builder.Services.AddScoped<IValidator<CategoryForm>, CategoryValidator>();
 
 //Messnger
 builder.Services.AddScoped<IMessenger<EmailMessageActivation>, EmailMessageActivation>();

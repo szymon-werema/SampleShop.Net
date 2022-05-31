@@ -32,13 +32,14 @@
                     <ul class="nav navbar-nav navbar-right">
                     @if(!User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item mr-4 p-1 iconsNavBar">
+
+                        <li class="nav-item mr-4 p-1 rounded-circle">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">
                                 <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i>
                                 </a>
                         </li>
                          
-                        <li class="nav-item mr-4 p-1 iconsNavBar">
+                        <li class="nav-item mr-4 p-1 rounded-circle">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Register">
                                 <i class="fa-solid fa-user-plus fa-xl"></i>
                             </a>
@@ -46,18 +47,23 @@
                         
                     }else
                     {
+                        <li class="nav-item mr-4 p-1 rounded-circle">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Additem">
+                                <i class="fa-solid fa-plus fa-xl"></i>
+                            </a>
+                        </li>
                         
-                        <li class="nav-item iconsNavBar">
+                        <li class="nav-item rounded-circle">
                             <a class="nav-link text-dark" asp-controller="Account" asp-action="Bucket">
                                <i class="fa-solid fa-basket-shopping fa-xl"></i>
                              </a>
                         </li>
-                        <li class="nav-item iconsNavBar">
+                        <li class="nav-item rounded-circle">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="MyAccount">
                                <i class="fa-solid fa-user fa-xl"></i>
                             </a>
                         </li>
-                        <li class="nav-item iconsNavBar">
+                        <li class="nav-item rounded-circle">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LogOut">
                                 <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
                                 </a>

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Shop.Models.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Shop.Controllers
 {
@@ -26,10 +27,10 @@ namespace Shop.Controllers
         public ActionResult MyAccount()
         {
             string email = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
-            
-            User u = db.User.Where(x => x.Email == email).FirstOrDefault();
+
+            User u = accountMenager.findUser(email);
            
-            if (u == null) BadRequest();
+            if (u == null) return BadRequest();
             AccountForm form = new AccountForm()
             {
                 User = u,
@@ -52,16 +53,17 @@ namespace Shop.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult FindUser(string email)
+        public async Task<ActionResult> FindUser(string email)
         {
             if (User.Identity.IsAuthenticated && HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value == email) return RedirectToAction("MyAccount", "Account");
             AccountForm form = new AccountForm();
-            User u = db.User.Where(x => x.Email == email).FirstOrDefault();
+            User u = accountMenager.findUser(email);
             
            
             if(u == null) return BadRequest();
+            u = await db.User.Include(a => a.Address).FirstAsync();
             form.User= u;
-            if (form.User.Address != null) form.Address = db.Address.Where(a => a.UserId == u.Id).First();
+            if (form.User.Address != null) form.Address = form.User.Address;
             return View(form);
             
 
@@ -73,10 +75,6 @@ namespace Shop.Controllers
            
             if (!ModelState.IsValid)
             {
-                foreach (var modelState in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(modelState.ErrorMessage);
-                }
                 return RedirectToAction("MyAccount", "Account");
             }
             
@@ -97,18 +95,22 @@ namespace Shop.Controllers
         public async Task<ActionResult> Bucket()
         {
             int bucketId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "BucketId").Value);
-           
-            return View(await accountMenager.getBucket(bucketId));
+            Bucket b = await accountMenager.getBucket(bucketId);
+            return View(b);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> RemoveItem(int itemid, int bucketid)
+        {
+            accountMenager.deleteBucket(itemid, bucketid);
+            return RedirectToAction("Bucket", "Account");
         }
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> ClearBucket(int id)
         {
-
-
             accountMenager.clearBucket(id);
             return RedirectToAction("Bucket", "Account");
         }
-
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h6Fi3CWdMkVqbcM714JoJQvsb4Kh3GTcNkJfVQBMV+g=",
+  "Hash": "grS/clyqHJU87az7sZbWjt52P8APrMYtKG+KxHzqB1E=",
   "Source": "Shop",
   "BasePath": "_content/Shop",
   "Mode": "Default",
@@ -35734,6 +35734,40 @@
       "OriginalItemSpec": "wwwroot\\ItemImage\\1020221432038.png"
     },
     {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662049020223512572.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/1653477662049020223512572.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662049020223512572.jpg"
+    },
+    {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662049020225109683.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/1653477662049020225109683.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662049020225109683.jpg"
+    },
+    {
       "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662056020221439980.jpg",
       "SourceId": "Shop",
       "SourceType": "Discovered",
@@ -35766,6 +35800,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662056020221443394.jpg"
+    },
+    {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662056020225109676.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/1653477662056020225109676.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662056020225109676.jpg"
     },
     {
       "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662063 (1)020221432078.jpg",
@@ -35836,6 +35887,23 @@
       "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662063020221443386.jpg"
     },
     {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662063020222712880.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/1653477662063020222712880.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662063020222712880.jpg"
+    },
+    {
       "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662063020224058135.jpg",
       "SourceId": "Shop",
       "SourceType": "Discovered",
@@ -35902,6 +35970,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662063020224207594.jpg"
+    },
+    {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1653477662063020225109656.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/1653477662063020225109656.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662063020225109656.jpg"
     },
     {
       "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\279695298_342061637992951_7512646587798904757_n020221350443.jpg",
