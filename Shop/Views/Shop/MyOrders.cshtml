@@ -1,0 +1,77 @@
+﻿@model List<Shop.Entities.ItemOrder>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Orders</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Order
+            </th>
+            <th>
+                Item
+            </th>
+            <th>
+                Ordered To user 
+            </th>
+            <th>
+                Ordered
+            </th>
+            <th>
+                Current state
+            </th>
+            <th>
+                Change state
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+@if ( Model != null)
+        {
+            
+        
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.User.FristName)
+                @Html.DisplayFor(modelItem => item.Order.User.LastName)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ordered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.StateOrder.Name)
+            </td>
+            <td>
+            
+
+                <form asp-action="ChangeState" asp-route-itemId="@item.Item.Id" asp-route-orderId="@item.OrderId" >
+
+                <select  name="stateId" onchange="this.form.submit()" class ="form-control" asp-items="ViewBag.SateOrderId"></select>
+                </form>
+            
+            
+            </td>
+            <td>
+                
+                <a asp-action="Item" asp-route-id="@item.Item.Id">Details</a> |
+                
+            </td>
+        </tr>
+}
+}
+    </tbody>
+</table>

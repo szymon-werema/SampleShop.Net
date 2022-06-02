@@ -49,6 +49,22 @@ namespace Shop.Entities
             {
                 eb.ToTable("Buckets").HasData(new Bucket() { Id=1, UserId=1});
             });
+            modelBuilder.Entity<StateOrder>(eb =>
+            {
+                eb.ToTable("StateOrders").HasData(getState());
+            });
+        }
+        private List<StateOrder> getState()
+        {
+            return new List<StateOrder>()
+            {
+                new StateOrder() { Id=1, Name = "New"},
+                new StateOrder() { Id=2, Name = "Packing"},
+                new StateOrder() { Id=3, Name = "State"},
+                new StateOrder() { Id=4, Name = "Delivered"}
+
+
+            };
         }
         private List<Category> GetCategories()
         {

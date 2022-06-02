@@ -24,6 +24,7 @@ namespace Shop.Entities
         public List<Image> Images { get; set; } = new List<Image>();
         public int Miniature { get; set; }
         public List<Bucket> Buckets { get; set; } = new List<Bucket>();
+        public List<Order> Orders { get; set; } = new List<Order>();
         
     }
 }

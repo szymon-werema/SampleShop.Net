@@ -25,6 +25,9 @@ namespace Shop.Entities
         public DbSet<Category> Categories { get; set; }
         public DbSet<Bucket> Buckets { get; set; }
         public DbSet<BucketItem> BucketItems { get; set; }
+        public DbSet<StateOrder> StateOrders { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<ItemOrder> ItemOrders { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -42,6 +45,37 @@ namespace Shop.Entities
             {
                 
             });
+            modelBuilder.Entity<Order>(eb =>
+            {
+                eb.HasOne( o => o.User)
+                .WithMany( u => u.Orders)
+                .HasForeignKey(o => o.UserId);
+
+                eb.HasMany(o => o.Items)
+                .WithMany(i => i.Orders)
+                .UsingEntity<ItemOrder>(
+                    io => io.HasOne(i => i.Item)
+                    .WithMany()
+                    .HasForeignKey(i => i.ItemId),
+                    io => io.HasOne(i => i.Order)
+                    .WithMany()
+                    .HasForeignKey(i => i.OrderId),
+
+                    i =>
+                    {
+                        i.HasKey(k => k.Id);
+                    }
+
+                    ); 
+            });
+            
+            modelBuilder.Entity<StateOrder>(eb =>
+            {
+               eb.HasMany(os => os.Orders)
+               .WithOne(o => o.StateOrder)
+               .HasForeignKey(o => o.StateOrderId);
+            });
+    
             modelBuilder.Entity<Bucket>(eb =>
             {
                 eb.HasOne(b => b.User).

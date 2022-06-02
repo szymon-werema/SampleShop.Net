@@ -73,10 +73,10 @@ namespace Shop.Controllers
             //i.Images = images;
             //i.User = db.User.Where(u => u.Id == i.UserId).First();
             //i.Category = db.Categories.Where(x => x.Id == i.CategoryId).FirstOrDefault();
-            Item i = i = await db.Items.Where(it => it.Id == id).Include(it => it.Images)
+            Item i  = await db.Items.Where(it => it.Id == id).Include(it => it.Images)
                     .Include(u => u.User)
                     .Include(c => c.Category).FirstAsync();
-            if (i == null || i.Ammount < 1 ) return BadRequest();
+            if (i == null ) return BadRequest();
            
             return View(i);
         }
@@ -88,14 +88,7 @@ namespace Shop.Controllers
            
             try
             {
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
-                Console.WriteLine(ammount);
+               
                 await shopService.addToCart(id, bucketId, ammount);
                 return RedirectToAction("Item", "Shop", new { id = id });
             }
@@ -106,19 +99,75 @@ namespace Shop.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> addCategory()
         {
 
             return View(new CategoryForm());
         }
         [HttpPost]
-        [Authorize]
+        
         public async Task<ActionResult> addCategory(CategoryForm category)
         {
             if(!ModelState.IsValid) return View();
             shopService.addCategory(category);
             return View();
         }
+        [HttpGet]
+        
+        public async Task<ActionResult> addOrder()
+        {
+            try
+            {
+                int bucketId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "BucketId").Value);
+                await shopService.AddOrder(bucketId);
+                return RedirectToAction("ClearBucket", "Account");
+               
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+           
+        }
+        [HttpGet]
+        public async Task<ActionResult> Orders()
+        {
+            int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+            List<ItemOrder> orders = await shopService.Orders(userId);
+
+            return View(orders);
+        }
+        [HttpGet]
+        public async Task<ActionResult> MyOrders()
+        {
+            ViewBag.SateOrderId = new SelectList(db.StateOrders.ToDictionary(s => s.Id, s => s.Name), "Key", "Value");
+            int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+
+            List<ItemOrder> orders = await shopService.MyOrders(userId);
+            return View(orders);
+        }
+        
+        
+        [HttpPost]
+        public async Task<ActionResult> ChangeState(int stateId, int orderId)
+        {
+           
+
+            
+            int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+            try
+            {
+                await shopService.ChangeStateOrder(userId, stateId , orderId);
+                
+                return RedirectToAction("MyOrders", "Shop");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }

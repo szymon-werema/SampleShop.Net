@@ -52,13 +52,16 @@
         <dd class = "col-sm-10">
             <img class="img-thumbnail" height="300px" width="300px" src="@item.Images.First().Path"/>
         </dd>
-        <a asp-action="RemoveItem" asp-route-itemid="@item.Id" asp-route-bucketid="@Model.Id"><button  type="button" class="btn btn-danger w-25">Remove item</button></a>
+        <a asp-action="RemoveItem" asp-route-itemid="@item.Id" ><button  type="button" class="btn btn-danger w-25">Remove item</button></a>
         <hr class="mt-3 mb-3"/>
         }
         }
     </dl>
 </div>
 <div class="mt-3 mb-3">
-    <a asp-action="ClearBucket" asp-route-id="@Model.Id">Clear bucket</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (Model.Items != null)
+    {
+        <a asp-action="addOrder" asp-controller="Shop" >Buy it</a>
+    }
+    <a asp-action="ClearBucket">Clear bucket</a> |
 </div>

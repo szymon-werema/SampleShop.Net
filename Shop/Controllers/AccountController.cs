@@ -100,16 +100,18 @@ namespace Shop.Controllers
         }
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> RemoveItem(int itemid, int bucketid)
+        public async Task<ActionResult> RemoveItem(int itemid)
         {
-            accountMenager.deleteBucket(itemid, bucketid);
+            int bucketId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "BucketId").Value);
+            accountMenager.deleteBucket(itemid, bucketId);
             return RedirectToAction("Bucket", "Account");
         }
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> ClearBucket(int id)
+        public async Task<ActionResult> ClearBucket()
         {
-            accountMenager.clearBucket(id);
+            int bucketId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "BucketId").Value);
+            accountMenager.clearBucket(bucketId);
             return RedirectToAction("Bucket", "Account");
         }
     }

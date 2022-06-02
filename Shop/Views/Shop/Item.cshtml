@@ -10,6 +10,8 @@
     <h4>Item</h4>
     <hr />
     <dl class="row">
+        @if(Model.Ammount >0)
+        {
         <form asp-action="AddToCart" asp-route-id="@Model.Id" asp-route-bucketid="@Model.Id">
         <div class="input-group mb-3 w-25">
           <div class="input-group-prepend">
@@ -19,6 +21,8 @@
         </div>
 
         </form>
+            
+        }
         
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)

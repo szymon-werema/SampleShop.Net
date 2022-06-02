@@ -21,6 +21,8 @@ namespace Shop.Entities
         public string PhoneNumber { get; set; }
         public List<Item> Item { get; set; } =new List<Item>();
         public Bucket? Bucket { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
+        
        
     }
 }
