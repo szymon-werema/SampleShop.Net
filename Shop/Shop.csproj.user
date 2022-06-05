@@ -11,5 +11,6 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>Shop.Entities.LocalDbContext</WebStackScaffolding_DbContextTypeFullName>
+    <ActiveDebugProfile>Docker</ActiveDebugProfile>
   </PropertyGroup>
 </Project>

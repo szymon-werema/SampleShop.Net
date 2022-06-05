@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop.Entities;
 using Shop.Models;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace Shop.Controllers
 {
@@ -20,10 +22,22 @@ namespace Shop.Controllers
 
         public IActionResult Index()
         {
-            
-            return View(db.Items.Where(it => it.Ammount>0).Include(it=> it.User).Include(it => it.Images).OrderBy(it => it.AddedTime).Take(8).ToList());
+            ViewBag.CategoryId = new SelectList(db.Categories.ToDictionary(s => s.Id, s => s.Name), "Key", "Value");
+            return View(db.Items.Where(it => it.Ammount>0).Include(it=> it.User).Include(it => it.Images).OrderBy(it => it.AddedTime).ToList());
         }
-
+        public IActionResult Find(string itemName)
+        {
+            ViewBag.CategoryId = new SelectList(db.Categories.ToDictionary(s => s.Id, s => s.Name), "Key", "Value");
+            if (itemName != null) return View("Index",db.Items.Where(it => it.Ammount > 0).Where(it => Regex.IsMatch(it.Name, itemName) ).Include(it => it.User).Include(it => it.Images).OrderBy(it => it.AddedTime).ToList());
+            return View("Index");
+        }
+        public IActionResult CategoryFilter(int Category)
+        {
+            
+            ViewBag.CategoryId =new SelectList(db.Categories.ToDictionary(s => s.Id , s => s.Name), "Key", "Value");
+            return View("Index", db.Items.Where(it => it.Ammount > 0).Where(it => it.CategoryId == Category).Include(it => it.User).Include(it => it.Images).OrderBy(it => it.AddedTime).ToList());
+           
+        }
         public IActionResult Privacy()
         {
             return View();

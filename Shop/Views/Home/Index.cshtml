@@ -4,13 +4,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-        <h1>Latest items</h1>
 
-<br/>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+     <form asp-action="CategoryFilter"> 
+    <label>Category: </label>
+    <select class="align-self-lg-auto" name="Category" onchange="this.form.submit()" class ="form-control" asp-items="ViewBag.CategoryId">
+    <option disable >______________</option>
 
+    </select>
+     </form>
+    <form class="d-flex input-group w-auto" asp-action="Find" >
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        name="itemName"
+      />
+      <span class="input-group-text border-0" style="background-color:#F8F9FA;" id="search-addon">
+         <button type="submit" class="border-0" style="background-color:#F8F9FA;" > <i class="fas fa-search"></i> </button>
+      </span>
+    </form>
+  </div>
+</nav>
+
+
+<hr />
  <div class="row">
-    
-             @foreach(var item in Model)
+  @if(Model != null)
+    {
+        
+  
+    @foreach(var item in Model)
                 {
                     <div class="col-md-6 col-lg-4 item">
                     <form asp-action="item" asp-controller="Shop" asp-route-id="@item.Id" > 
@@ -38,7 +65,7 @@
                 </form>
                 </div>
              }
-               
+           }      
       
   
 </div>
