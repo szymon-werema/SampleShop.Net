@@ -107,6 +107,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxJdGVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Git/SampleShop.Net/Shop/Views/Shop/MyItems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxNeUl0ZW1zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Git/SampleShop.Net/Shop/Views/Shop/MyOrders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxNeU9yZGVycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

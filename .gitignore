@@ -1,3 +1,4 @@
 Shop/appsettings.json
-Shop/local.db
-Shop/Migrations*
+Shop/local*
+Shop/Migrations
+Shop/wwwroot/ItemImage/*

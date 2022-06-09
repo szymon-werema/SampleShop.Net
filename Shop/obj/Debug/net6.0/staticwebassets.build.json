@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1OnmRa8uNFn05BxpkP47b8CtB6I9Cu+p6Jvc34j+PPU=",
+  "Hash": "CKWSf7V+8w5uD1LIzLZiwT0qOqrlb6zz7VXtj20IHDI=",
   "Source": "Shop",
   "BasePath": "_content/Shop",
   "Mode": "Default",
@@ -36176,6 +36176,40 @@
       "OriginalItemSpec": "wwwroot\\ItemImage\\1653477662063020225109656.jpg"
     },
     {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\1f728af38a814a69ade75787bd52486b020225203065.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/1f728af38a814a69ade75787bd52486b020225203065.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\1f728af38a814a69ade75787bd52486b020225203065.jpg"
+    },
+    {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\277920133_653779835855598_5338915186104308386_n(1)020225203025.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/277920133_653779835855598_5338915186104308386_n(1)020225203025.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\277920133_653779835855598_5338915186104308386_n(1)020225203025.jpg"
+    },
+    {
       "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\279695298_342061637992951_7512646587798904757_n020221350443.jpg",
       "SourceId": "Shop",
       "SourceType": "Discovered",
@@ -36191,6 +36225,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\ItemImage\\279695298_342061637992951_7512646587798904757_n020221350443.jpg"
+    },
+    {
+      "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\ac445aaa7b6dd6f7a4e6204af837e2cf020225203073.jpg",
+      "SourceId": "Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\",
+      "BasePath": "_content/Shop",
+      "RelativePath": "ItemImage/ac445aaa7b6dd6f7a4e6204af837e2cf020225203073.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ItemImage\\ac445aaa7b6dd6f7a4e6204af837e2cf020225203073.jpg"
     },
     {
       "Identity": "D:\\Git\\SampleShop.Net\\Shop\\wwwroot\\ItemImage\\Bez tytułu020222200003.png",

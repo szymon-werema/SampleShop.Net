@@ -61,9 +61,23 @@ namespace Shop.Controllers
         {
             return View();
         }
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return View();
+            var item = db.Items.Where(i => i.Id == id).FirstOrDefault();
+            if (item != null)
+            {
+                db.Remove(item);
+                
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("MyItems", "Shop");
+        }
+        public ActionResult MyItems()
+        {
+            int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+
+            return View(db.Items.Where(i => i.UserId == userId).ToList());
         }
         public async Task<ActionResult> Item(int id)
         {
@@ -141,10 +155,12 @@ namespace Shop.Controllers
         [HttpGet]
         public async Task<ActionResult> MyOrders()
         {
+            
             ViewBag.SateOrderId = new SelectList(db.StateOrders.ToDictionary(s => s.Id, s => s.Name), "Key", "Value");
             int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
 
             List<ItemOrder> orders = await shopService.MyOrders(userId);
+            if (orders != null) return View();
             return View(orders);
         }
         
